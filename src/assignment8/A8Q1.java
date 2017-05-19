@@ -26,6 +26,12 @@ public class A8Q1 extends JComponent {
     // add a direction- initialize a variable
     int earsDirection = 1;
     
+    int eyes = 290;
+    int glitch = 0;
+    int glitch2 = 0;
+    
+    int eyesDirection = 1;
+    
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
     long desiredFPS = 60;
@@ -84,37 +90,48 @@ public class A8Q1 extends JComponent {
         }
         g.fillRect(0, 0, WIDTH, HEIGHT);
 //g.fillRect(0, 0, WIDTH, HEIGHT);
+        if(eyes <= 270){
+            glitch = -100;
+            glitch2 = 100;
+        }
+        else{
+            glitch = 0;
+            glitch2 = 0;
+        }
         // GAME DRAWING GOES HERE 
         // create face of a bear with an oval (golden colour)
         g.setColor(Color.GRAY);
-        g.fillOval(199, 150, 350, 350);
+        g.fillOval(glitch + 199, glitch + 150, 350, 350);
 
         // ears
-        g.fillOval(ears, 80, 150, 150);
-        g.fillOval(ears + 295, 80, 150, 150);
+        g.fillOval(glitch + ears, glitch + 80, 150, 150);
+        g.fillOval(glitch2 + ears + 295, glitch2 +80, 150, 150);
 
         // create the eyes
         g.setColor(Color.WHITE);
-        g.fillOval(250, 200, 100, 100);
-        g.fillOval(400, 200, 100, 100);
+        g.fillOval(glitch + 250, glitch + 200, 100, 100);
+        g.fillOval(glitch2 + 400, glitch2 + 200, 100, 100);
 
-        g.fillOval(ears + 25, 100, 100, 100);
-        g.fillOval(ears + 320, 100, 100, 100);
+        g.fillOval(glitch + ears + 25, glitch + 100, 100, 100);
+        g.fillOval(glitch2 + ears + 320, glitch2 + 100, 100, 100);
 
         g.setColor(Color.black);
-        g.fillOval(260, 210, 80, 80);
-        g.fillOval(410, 210, 80, 80);
+        g.fillOval(glitch + 260, glitch + 210, 80, 80);
+        g.fillOval(glitch2 + 410, glitch2 + 210, 80, 80);
 
-        g.fillOval(340, 320, 70, 50);
+        g.fillOval(glitch + 340, glitch + 320, 70, 50);
 
         g.setColor(Color.WHITE);
-        g.fillOval(290, 210, 40, 40);
-        g.fillOval(440, 210, 40, 40);
+        if(eyes <= 270)
+            g.setColor(Color.RED);
+        g.fillOval(glitch + eyes, glitch + 210, 40, 40);
+        g.fillOval(glitch2 + eyes + 150, glitch2 + 210, 40, 40);
 
         // draw smile 
+        g.setColor(Color.WHITE);
 
-        g.drawArc(300, 320, 150, 150, 180, 180);
-        g.fillArc(300, 320, 150, 150, 180, 180);
+        g.drawArc(glitch + 300, glitch + 320, 150, 150, 180, 180);
+        g.fillArc(glitch + 300, glitch + 320, 150, 150, 180, 180);
 
         // create the nose 
 
@@ -166,6 +183,17 @@ public class A8Q1 extends JComponent {
             }
             //changing the ears variable number buy adding it to earsDirection
              ears = earsDirection + ears;
+             
+             if (eyes <= 260){
+                 eyesDirection = 1;
+             }
+//          
+             if(eyes >= 300){
+                 eyesDirection = -1;
+             }
+               eyes = eyesDirection*2 + eyes;
+             //eyes 
+             
               
     
 
