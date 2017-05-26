@@ -17,33 +17,38 @@ import java.util.Random;
  */
 public class A8Q1 extends JComponent {
 
-    // Height and Width of our game
-    static final int WIDTH = 800;
+    // Height and Width of the game
+    static final int WIDTH = 780;
     static final int HEIGHT = 600;
     
-    // create a variable for the ears integer
-    int ears = 155;
-    // add a direction- initialize a variable
+    // create a variable for the ears integer 
+    // to be used as an input for the coordinate of the ears --> used to move the ears
+        int ears = 155;  
+        
+    // add a direction- initialize a variable for the movement
     int earsDirection = 1;
     
+    // create a variable for the eyes integer
+    // create a variable for the eyes integer
+    // to be used as an input for the coordinate of the ears --> used to move the ears
     int eyes = 290;
+    
+     // add a direction- initialize a variable for the movement
+    int eyesDirection = 1;
+    
+    // intilize the  variable for the glitch to be used 
     int glitch = 0;
     int glitch2 = 0;
     
-    int eyesDirection = 1;
+    
+ 
     
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
     long desiredFPS = 60;
     long desiredTime = (1000) / desiredFPS;
     // GAME VARIABLES WOULD GO HERE
-    // create the golden colour of pikachu
-    Color golden = new Color(252, 215, 0);
-     
-      
-      
-      
-
+   
     // GAME VARIABLES END HERE   
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
@@ -51,18 +56,15 @@ public class A8Q1 extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
         // always clear the screen first!
-
+        // create and initialize the variable "random" to create a seizure (exploring with the drawing functions)
         Random rand = new Random();
-        int sieze = rand.nextInt(10) + 1;
+         int sieze = rand.nextInt(10) + 1;
         switch (sieze) {
             case 1:
                 g.setColor(Color.CYAN);
                 break;
             case 2:
                 g.setColor(Color.YELLOW);
-                break;
-            case 3:
-                g.setColor(Color.RED);
                 break;
             case 4:
                 g.setColor(Color.BLUE);
@@ -76,14 +78,8 @@ public class A8Q1 extends JComponent {
             case 7:
                 g.setColor(Color.BLACK);
                 break;
-            case 8:
-                g.setColor(Color.ORANGE);
-                break;
             case 9:
                 g.setColor(Color.MAGENTA);
-                break;
-            case 10:
-                g.setColor(Color.WHITE);
                 break;
             default:
                 break;
@@ -99,7 +95,7 @@ public class A8Q1 extends JComponent {
             glitch2 = 0;
         }
         // GAME DRAWING GOES HERE 
-        // create face of a bear with an oval (golden colour)
+        // create face of a bear with an oval (gray colour)
         g.setColor(Color.GRAY);
         g.fillOval(glitch + 199, glitch + 150, 350, 350);
 
@@ -119,9 +115,10 @@ public class A8Q1 extends JComponent {
         g.fillOval(glitch + 260, glitch + 210, 80, 80);
         g.fillOval(glitch2 + 410, glitch2 + 210, 80, 80);
 
-        g.fillOval(glitch + 340, glitch + 320, 70, 50);
+        g.fillOval(glitch + 340 + glitch2, glitch + 320 + glitch2, 70, 50);
 
         g.setColor(Color.WHITE);
+        //when eyes are moved from their original spot, change the colour of eyes to red so it looks like a devil
         if(eyes <= 270)
             g.setColor(Color.RED);
         g.fillOval(glitch + eyes, glitch + 210, 40, 40);
@@ -130,10 +127,12 @@ public class A8Q1 extends JComponent {
         // draw smile 
         g.setColor(Color.WHITE);
 
-        g.drawArc(glitch + 300, glitch + 320, 150, 150, 180, 180);
-        g.fillArc(glitch + 300, glitch + 320, 150, 150, 180, 180);
+        g.drawArc(glitch + 300 + glitch, glitch + 320+ glitch, 150, 150, 180, 180);
+        g.fillArc(glitch + 300+ glitch, glitch + 320+ glitch, 150, 150, 180, 180);
 
         // create the nose 
+        
+        
 
 
 
@@ -247,6 +246,9 @@ public class A8Q1 extends JComponent {
 
         // starts the game loop
         game.run();
+        
+      
+          
     }
 
     // Used to implement any of the Mouse Actions
