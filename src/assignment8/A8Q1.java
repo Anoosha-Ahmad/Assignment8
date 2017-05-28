@@ -20,35 +20,32 @@ public class A8Q1 extends JComponent {
     // Height and Width of the game
     static final int WIDTH = 780;
     static final int HEIGHT = 600;
-    
+
     // create a variable for the ears integer 
     // to be used as an input for the coordinate of the ears --> used to move the ears
-        int ears = 155;  
-        
+    int ears = 155;
+
     // add a direction- initialize a variable for the movement
     int earsDirection = 1;
-    
+
     // create a variable for the eyes integer
     // create a variable for the eyes integer
     // to be used as an input for the coordinate of the ears --> used to move the ears
     int eyes = 290;
-    
-     // add a direction- initialize a variable for the movement
+
+    // add a direction- initialize a variable for the movement
     int eyesDirection = 1;
-    
+
     // intilize the  variable for the glitch to be used 
     int glitch = 0;
     int glitch2 = 0;
-    
-    
- 
-    
+
     // sets the framerate and delay for our game
     // you just need to select an approproate framerate
     long desiredFPS = 60;
     long desiredTime = (1000) / desiredFPS;
     // GAME VARIABLES WOULD GO HERE
-   
+
     // GAME VARIABLES END HERE   
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
@@ -56,9 +53,10 @@ public class A8Q1 extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
         // always clear the screen first!
+        g.clearRect(0, 0, WIDTH, HEIGHT);
         // create and initialize the variable "random" to create a seizure (exploring with the drawing functions)
         Random rand = new Random();
-         int sieze = rand.nextInt(10) + 1;
+        int sieze = rand.nextInt(10) + 1;
         switch (sieze) {
             case 1:
                 g.setColor(Color.CYAN);
@@ -85,23 +83,30 @@ public class A8Q1 extends JComponent {
                 break;
         }
         g.fillRect(0, 0, WIDTH, HEIGHT);
-//g.fillRect(0, 0, WIDTH, HEIGHT);
-        if(eyes <= 270){
+        //g.fillRect(0, 0, WIDTH, HEIGHT);
+        if (eyes <= 270) {
             glitch = -100;
             glitch2 = 100;
-        }
-        else{
+        } else {
             glitch = 0;
             glitch2 = 0;
         }
         // GAME DRAWING GOES HERE 
-        // create face of a bear with an oval (gray colour)
+
+        // create face and body of a bear with an oval (gray colour)
         g.setColor(Color.GRAY);
-        g.fillOval(glitch + 199, glitch + 150, 350, 350);
+        // create the body
+        // draw a triangle
+        int[] xPoints = {380, 780, -35};
+        int[] yPoints = {450, 700, 700};
+        // x positions, y positions, how many points
+        g.fillPolygon(xPoints, yPoints, 3);
+        //create the face
+        g.fillOval(199, +150, 350, 350);
 
         // ears
         g.fillOval(glitch + ears, glitch + 80, 150, 150);
-        g.fillOval(glitch2 + ears + 295, glitch2 +80, 150, 150);
+        g.fillOval(glitch2 + ears + 295, glitch2 + 80, 150, 150);
 
         // create the eyes
         g.setColor(Color.WHITE);
@@ -115,27 +120,23 @@ public class A8Q1 extends JComponent {
         g.fillOval(glitch + 260, glitch + 210, 80, 80);
         g.fillOval(glitch2 + 410, glitch2 + 210, 80, 80);
 
+        //nose 
         g.fillOval(glitch + 340 + glitch2, glitch + 320 + glitch2, 70, 50);
 
         g.setColor(Color.WHITE);
+
         //when eyes are moved from their original spot, change the colour of eyes to red so it looks like a devil
-        if(eyes <= 270)
+        if (eyes <= 270) {
             g.setColor(Color.RED);
+        }
         g.fillOval(glitch + eyes, glitch + 210, 40, 40);
         g.fillOval(glitch2 + eyes + 150, glitch2 + 210, 40, 40);
 
         // draw smile 
         g.setColor(Color.WHITE);
 
-        g.drawArc(glitch + 300 + glitch, glitch + 320+ glitch, 150, 150, 180, 180);
-        g.fillArc(glitch + 300+ glitch, glitch + 320+ glitch, 150, 150, 180, 180);
-
-        // create the nose 
-        
-        
-
-
-
+        g.drawArc(glitch + 300 + glitch, glitch + 320 + glitch, 150, 150, 180, 180);
+        g.fillArc(glitch + 300 + glitch, glitch + 320 + glitch, 150, 150, 180, 180);
 
         // GAME DRAWING ENDS HERE
     }
@@ -165,39 +166,32 @@ public class A8Q1 extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
+            // ANIMATION
             //move the ears side to side
-            //right
-            if (ears <= 105){
+            //moving the ears to the right
+            if (ears <= 105) {
                 // 
                 earsDirection = 1;
-                
-                
-                
+
             }
             //moving ears to the left
-            if (ears >= 205){
-                earsDirection= -1;
-                
-                
+            if (ears >= 205) {
+                earsDirection = -1;
+
             }
-            //changing the ears variable number buy adding it to earsDirection
-             ears = earsDirection + ears;
-             
-             if (eyes <= 260){
-                 eyesDirection = 1;
-             }
-//          
-             if(eyes >= 300){
-                 eyesDirection = -1;
-             }
-               eyes = eyesDirection*2 + eyes;
-             //eyes 
-             
-              
-    
+            //changing the ears variable number by adding it to earsDirection to move the ears
+            ears = earsDirection + ears;
 
-
-
+            //moving the eyes to the right
+            if (eyes <= 260) {
+                eyesDirection = 1;
+            }
+//          //moving the eyes to the left
+            if (eyes >= 300) {
+                eyesDirection = -1;
+            }
+            //changing the eyes variable number by adding it to eyesDirection to move the eyes
+            eyes = eyesDirection * 2 + eyes;
 
             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
@@ -246,9 +240,7 @@ public class A8Q1 extends JComponent {
 
         // starts the game loop
         game.run();
-        
-      
-          
+
     }
 
     // Used to implement any of the Mouse Actions
